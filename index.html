@@ -257,14 +257,26 @@
   .host-card .en{font-size:14px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
   .host-card p{font-size:16px;color:#33363f;margin-top:14px;max-width:560px}
 
-  /* ---- final cta ---- */
+  /* ---- final cta + signup form ---- */
   .final{
     background:radial-gradient(900px 500px at 50% -20%,#0b34c9,var(--blue-deep));
     color:#fff;text-align:center;
   }
   .final h2{font-size:clamp(32px,5vw,52px);font-weight:800}
-  .final p{font-size:clamp(17px,2vw,20px);color:#c6cffb;margin:16px auto 32px;max-width:540px}
+  .final p{font-size:clamp(17px,2vw,20px);color:#c6cffb;margin:16px auto 30px;max-width:560px}
   .final .cta-row{justify-content:center}
+  .signup{max-width:440px;margin:0 auto;display:flex;flex-direction:column;gap:12px;text-align:left}
+  .signup input{
+    font-family:'Inter',sans-serif;font-size:16px;padding:15px 18px;border-radius:12px;
+    border:2px solid transparent;background:#fff;color:var(--ink);width:100%;
+  }
+  .signup input::placeholder{color:#9298a6}
+  .signup input:focus{outline:none;border-color:var(--wa)}
+  .signup button{justify-content:center;margin-top:6px;width:100%;cursor:pointer;border:none}
+  .form-thanks,.form-err{display:none;max-width:440px;margin:22px auto 0;font-weight:600}
+  .form-thanks{color:#fff;font-size:19px}
+  .form-thanks span{display:block;font-weight:400;font-size:14px;color:#c6cffb;margin-top:6px}
+  .form-err{color:#ffd2da;font-size:15px}
 
   /* ---- footer ---- */
   footer{background:var(--ink);color:#c3c6cf;padding:56px 0 40px}
@@ -595,19 +607,23 @@
   </div>
 </section>
 
-<!-- ================= FINAL CTA ================= -->
-<section class="final">
+<!-- ================= FINAL CTA — SIGNUP ================= -->
+<section class="final" id="enskri">
   <div class="wrap reveal">
-    <h2>Senk minit ou ap tann ou.</h2>
-    <p>Your five minutes is waiting. Join the WhatsApp community and we'll tell you the moment the first workshop lands.</p>
-    <div class="cta-row">
-      <a class="btn btn-wa js-wa" href="#">
-        <svg class="wa" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M16 3C9.4 3 4 8.4 4 15c0 2.3.6 4.4 1.8 6.3L4 29l7.9-1.7c1.8 1 3.9 1.6 6.1 1.6 6.6 0 12-5.4 12-12S22.6 3 16 3z" fill="#fff"/>
-          <path d="M22.6 18.6c-.4-.2-2.1-1-2.4-1.1-.3-.1-.6-.2-.8.2-.2.4-.9 1.1-1.1 1.3-.2.2-.4.2-.8.1-2.2-1.1-3.6-2-5.1-4.5-.4-.7.4-.6 1.1-2 .1-.3 0-.5 0-.7-.1-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.5-.3.4-1.2 1.2-1.2 2.9 0 1.7 1.2 3.4 1.4 3.6.2.2 2.5 3.9 6.1 5.4 2.3 1 3.2 1 4.3.9.7-.1 2.1-.9 2.4-1.7.3-.8.3-1.6.2-1.7-.1-.2-.3-.3-.6-.4z" fill="#25D366"/>
-        </svg>
-        Join on WhatsApp
-      </a>
+    <h2>Enskri jodi a.</h2>
+    <p>Antre enfòmasyon w — n ap fè w konnen lè premye atelye gratis la pare. <em style="color:#9fb4ff;font-style:normal">Sign up and we'll reach out the moment the first free workshop is scheduled.</em></p>
+    <form class="signup" id="signupForm" novalidate>
+      <input type="text" name="non" placeholder="Non ou · Your name" required autocomplete="name">
+      <input type="tel" name="whatsapp" placeholder="Nimewo WhatsApp ou · Your WhatsApp number" required autocomplete="tel">
+      <input type="text" name="vil" placeholder="Vil ou · Your city" autocomplete="address-level2">
+      <button type="submit" class="btn btn-wa">Enskri →</button>
+    </form>
+    <div class="form-thanks" id="formThanks">
+      Mèsi! Nou resevwa enskripsyon ou. 🙌
+      <span>Thank you — we've got your signup and we'll be in touch soon.</span>
+    </div>
+    <div class="form-err" id="formErr">
+      Yon erè rive — tanpri ekri nou dirèkteman: weber@bimopsstudio.com
     </div>
   </div>
 </section>
@@ -641,21 +657,65 @@
 
 <script>
   /* =====================================================
-     ONLY EDIT THIS LINE — your WhatsApp number.
-     Format: country code + number, no +, no spaces, no dashes.
-     Example for a US number: "13055551234"
+     WHATSAPP NUMBER — drop the real number here once the
+     WhatsApp Business account exists. Format: country code
+     + number, no +, no spaces, no dashes. e.g. "13055551234"
+     While it's still the X placeholder, every WhatsApp button
+     auto-routes to the signup form — nothing is ever broken.
      ===================================================== */
   const WHATSAPP_NUMBER = "1XXXXXXXXXX";
 
   (function(){
-    var base    = "https://wa.me/" + WHATSAPP_NUMBER;
-    var join    = encodeURIComponent("Bonjou, m enterese nan AI Lakay");
-    var list    = encodeURIComponent("Mete m sou lis la pou premye atelye a");
-    var host    = encodeURIComponent("Bonjou, mwen se yon lidè kominote — m ta renmen yon atelye");
+    var hasNumber = WHATSAPP_NUMBER && WHATSAPP_NUMBER.indexOf("X") === -1;
+    if (hasNumber) {
+      var base = "https://wa.me/" + WHATSAPP_NUMBER;
+      var join = encodeURIComponent("Bonjou, m enterese nan AI Lakay");
+      var list = encodeURIComponent("Mete m sou lis la pou premye atelye a");
+      var host = encodeURIComponent("Bonjou, mwen se yon lidè kominote — m ta renmen yon atelye");
+      document.querySelectorAll(".js-wa").forEach(function(a){ a.href = base+"?text="+join; });
+      document.querySelectorAll(".js-wa-list").forEach(function(a){ a.href = base+"?text="+list; });
+      document.querySelectorAll(".js-wa-host").forEach(function(a){ a.href = base+"?text="+host; });
+    } else {
+      document.querySelectorAll(".js-wa,.js-wa-list,.js-wa-host").forEach(function(a){ a.href = "#enskri"; });
+    }
 
-    document.querySelectorAll(".js-wa").forEach(function(a){ a.href = base + "?text=" + join; });
-    document.querySelectorAll(".js-wa-list").forEach(function(a){ a.href = base + "?text=" + list; });
-    document.querySelectorAll(".js-wa-host").forEach(function(a){ a.href = base + "?text=" + host; });
+    /* signup form -> emails submissions to weber@bimopsstudio.com via FormSubmit */
+    var form = document.getElementById("signupForm");
+    if (form) {
+      form.addEventListener("submit", function(e){
+        e.preventDefault();
+        var err = document.getElementById("formErr");
+        if (!form.non.value.trim() || !form.whatsapp.value.trim()) {
+          err.textContent = "Tanpri antre non w ak nimewo WhatsApp ou.";
+          err.style.display = "block";
+          return;
+        }
+        var btn = form.querySelector("button");
+        btn.disabled = true; btn.textContent = "Y ap voye…";
+        fetch("https://formsubmit.co/ajax/weber@bimopsstudio.com", {
+          method:"POST",
+          headers:{"Content-Type":"application/json","Accept":"application/json"},
+          body: JSON.stringify({
+            Non: form.non.value,
+            WhatsApp: form.whatsapp.value,
+            Vil: form.vil.value || "—",
+            _subject: "AI Lakay — Nouvo enskripsyon",
+            _template: "table"
+          })
+        })
+        .then(function(r){ return r.json(); })
+        .then(function(){
+          form.style.display = "none";
+          err.style.display = "none";
+          document.getElementById("formThanks").style.display = "block";
+        })
+        .catch(function(){
+          btn.disabled = false; btn.textContent = "Enskri →";
+          err.textContent = "Yon erè rive — tanpri ekri nou dirèkteman: weber@bimopsstudio.com";
+          err.style.display = "block";
+        });
+      });
+    }
 
     /* scroll reveal */
     var io = new IntersectionObserver(function(entries){
