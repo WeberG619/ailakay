@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>document.documentElement.className="js";</script>
+<title>AI Lakay — AI nan lang ou</title>
+<meta name="description" content="Free workshops, in Haitian Creole, teaching everyday people how to use AI on their phone. South Florida launch.">
+
+<!-- Open Graph / social share -->
+<meta property="og:title" content="AI Lakay — AI nan lang ou">
+<meta property="og:description" content="AI in your language. For your life. Free AI workshops in Creole, South Florida.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ailakay.com">
+<meta property="og:locale" content="ht_HT">
+<meta property="og:site_name" content="AI Lakay">
+<meta property="og:image" content="https://ailakay.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="AI Lakay — AI nan lang ou. Free AI workshops in Creole.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Lakay — AI nan lang ou">
+<meta name="twitter:description" content="AI in your language. For your life. Free AI workshops in Creole, South Florida.">
+<meta name="twitter:image" content="https://ailakay.com/og-image.png">
+
+<!-- Inline SVG favicon: blue rounded square with a speech bubble -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2300209F'/%3E%3Cpath d='M16 20h32a4 4 0 0 1 4 4v16a4 4 0 0 1-4 4H30l-9 8v-8h-5a4 4 0 0 1-4-4V24a4 4 0 0 1 4-4z' fill='%23FAF8F2'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --blue:#00209F;
+    --blue-deep:#001563;
+    --red:#D21034;
+    --cream:#FAF8F2;
+    --ink:#1A1A1A;
+    --muted:#5b5f6b;
+    --wa:#25D366;
+    --card:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.wordmark{font-family:'Manrope',sans-serif;line-height:1.15;letter-spacing:-0.02em}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  section{padding:clamp(56px,9vw,104px) 0}
+
+  /* ---- header ---- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(0,32,159,0.97);
+    backdrop-filter:blur(8px);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1080px;margin:0 auto}
+  .wordmark{font-weight:800;font-size:22px;color:#fff;display:flex;align-items:center;gap:9px}
+  .wordmark .ai{
+    background:var(--cream);color:var(--blue);
+    padding:1px 9px;border-radius:7px;font-size:20px;
+  }
+  .nav-right{display:flex;align-items:center;gap:26px}
+  .nav-link{color:#cdd6ff;text-decoration:none;font-size:15px;font-weight:500;transition:color .15s ease}
+  .nav-link:hover{color:#fff}
+  .nav-cta{
+    font-family:'Manrope',sans-serif;font-weight:700;font-size:14px;
+    color:var(--blue);background:var(--cream);
+    padding:9px 18px;border-radius:999px;text-decoration:none;
+    transition:transform .15s ease;white-space:nowrap;
+  }
+  .nav-cta:hover{transform:translateY(-1px)}
+
+  /* ---- hero ---- */
+  .hero{
+    background:radial-gradient(1100px 600px at 78% -10%,#0b34c9 0%,var(--blue) 42%,var(--blue-deep) 100%);
+    color:#fff;padding:clamp(56px,9vw,96px) 0 clamp(64px,10vw,112px);
+    position:relative;overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;width:340px;height:340px;border-radius:50%;
+    background:radial-gradient(circle,rgba(210,16,52,.55),transparent 70%);
+    bottom:-150px;left:-120px;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;position:relative;z-index:2}
+  .eyebrow{
+    display:inline-block;font-weight:600;font-size:13px;letter-spacing:.12em;
+    text-transform:uppercase;color:#9fb4ff;margin-bottom:18px;
+  }
+  .hero h1{font-size:clamp(44px,7vw,76px);font-weight:800}
+  .hero .lead{font-size:clamp(19px,2.4vw,25px);font-weight:500;margin-top:18px;color:#e7ebff}
+  .hero .sub{font-size:16px;margin-top:14px;color:#b9c4f0;max-width:430px}
+  .cta-row{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .btn{
+    font-family:'Manrope',sans-serif;font-weight:700;font-size:17px;
+    display:inline-flex;align-items:center;gap:11px;
+    padding:16px 28px;border-radius:999px;text-decoration:none;
+    transition:transform .15s ease,box-shadow .15s ease;cursor:pointer;border:none;
+  }
+  .btn-primary{background:var(--cream);color:var(--blue);box-shadow:0 12px 30px rgba(0,0,0,.28)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(0,0,0,.34)}
+  .btn-wa{background:var(--wa);color:#fff;box-shadow:0 12px 30px rgba(37,211,102,.34)}
+  .btn-wa:hover{transform:translateY(-2px)}
+  .btn .wa{width:24px;height:24px;flex-shrink:0}
+  .cta-note{font-size:13px;color:#9fb4ff}
+
+  /* ---- phone mockup ---- */
+  .phone{
+    width:248px;margin:0 auto;background:#0c0c14;border-radius:34px;
+    padding:12px;box-shadow:0 30px 70px rgba(0,0,0,.45);position:relative;
+  }
+  .phone::before{
+    content:"";position:absolute;top:13px;left:50%;transform:translateX(-50%);
+    width:78px;height:18px;background:#0c0c14;border-radius:0 0 14px 14px;z-index:3;
+  }
+  .screen{background:#ECEFF6;border-radius:24px;padding:34px 14px 18px;min-height:430px}
+  .chat-day{text-align:center;font-size:11px;color:#8a8f9c;margin-bottom:14px}
+  .bubble{
+    font-size:13.5px;line-height:1.5;padding:10px 13px;border-radius:16px;
+    margin-bottom:9px;max-width:84%;
+  }
+  .bubble.them{background:#fff;color:var(--ink);border-bottom-left-radius:5px}
+  .bubble.me{
+    background:var(--blue);color:#fff;margin-left:auto;
+    border-bottom-right-radius:5px;
+  }
+  .bubble .tag{display:block;font-size:10px;opacity:.6;margin-top:4px}
+
+  /* ---- stats strip ---- */
+  .stats{background:var(--ink);color:#fff}
+  .stats .wrap{padding-top:0;padding-bottom:0}
+  .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+  .stat .num{font-family:'Manrope',sans-serif;font-weight:800;font-size:clamp(34px,5vw,52px);color:#fff;line-height:1}
+  .stat .num .red{color:#ff6b85}
+  .stat .lbl{font-size:13.5px;color:#a9adb9;margin-top:8px}
+
+  /* ---- generic section heads ---- */
+  .kreyol-head{font-size:clamp(30px,4.4vw,46px);font-weight:800;color:var(--blue)}
+  .kreyol-head .accent-bar{
+    display:block;width:54px;height:5px;background:var(--red);
+    border-radius:3px;margin-bottom:18px;
+  }
+  .en-sub{font-size:14px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .body-lg{font-size:clamp(17px,1.9vw,19px);color:#33363f;max-width:680px;margin-top:18px}
+  .body-lg p+p{margin-top:16px}
+
+  /* ---- story ---- */
+  .story{background:var(--card)}
+  .pull{
+    font-family:'Manrope',sans-serif;font-weight:700;
+    font-size:clamp(20px,2.6vw,26px);color:var(--blue);
+    border-left:5px solid var(--red);padding-left:22px;margin:26px 0;
+  }
+
+  /* ---- use cases ---- */
+  .uc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+  .uc{
+    background:var(--card);border:1px solid #ece8dd;border-radius:16px;
+    padding:26px 24px;transition:transform .18s ease,box-shadow .18s ease;
+  }
+  .uc:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,32,159,.10)}
+  .uc .ico{font-size:30px;display:block;margin-bottom:12px}
+  .uc h3{font-size:18px;font-weight:800;color:var(--blue);margin-bottom:5px}
+  .uc .en{font-size:13px;font-weight:600;color:#9298a6;text-transform:uppercase;letter-spacing:.03em;margin-bottom:9px}
+  .uc p{font-size:14.5px;color:var(--muted)}
+
+  /* ---- learn cards ---- */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:40px}
+  .card{
+    background:var(--card);border-radius:18px;padding:30px 26px;
+    border:1px solid #ece8dd;transition:transform .18s ease,box-shadow .18s ease;
+  }
+  .card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,32,159,.10)}
+  .card .ico{font-size:34px;display:block;margin-bottom:14px}
+  .card h3{font-size:20px;font-weight:800;color:var(--ink);margin-bottom:8px}
+  .card p{font-size:15px;color:var(--muted)}
+
+  /* ---- steps ---- */
+  .steps{background:var(--card)}
+  .step-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:44px;counter-reset:step}
+  .step{position:relative;padding-top:8px}
+  .step .circle{
+    width:52px;height:52px;border-radius:50%;background:var(--blue);color:#fff;
+    font-family:'Manrope',sans-serif;font-weight:800;font-size:22px;
+    display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+  }
+  .step h3{font-size:19px;font-weight:800;color:var(--ink);margin-bottom:4px}
+  .step .en{font-size:12.5px;font-weight:600;color:#9298a6;text-transform:uppercase;letter-spacing:.03em;margin-bottom:9px}
+  .step p{font-size:15px;color:var(--muted)}
+
+  /* ---- who-for ---- */
+  .whofor{background:var(--cream)}
+  .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .tag-pill{
+    background:var(--card);border:1px solid #e6e1d3;border-radius:999px;
+    padding:8px 16px;font-size:14px;font-weight:500;color:#3a3d46;
+  }
+
+  /* ---- workshop band ---- */
+  .workshop{
+    background:linear-gradient(135deg,var(--blue) 0%,var(--blue-deep) 100%);
+    color:#fff;position:relative;overflow:hidden;
+  }
+  .workshop::before{
+    content:"";position:absolute;width:260px;height:260px;border-radius:50%;
+    background:radial-gradient(circle,rgba(210,16,52,.5),transparent 70%);
+    top:-120px;right:-80px;
+  }
+  .workshop .inner{position:relative;z-index:2}
+  .workshop .kreyol-head{color:#fff}
+  .workshop .body-lg{color:#d6ddff}
+
+  /* ---- faq ---- */
+  .faq details{
+    background:var(--card);border:1px solid #ece8dd;border-radius:14px;
+    margin-bottom:12px;overflow:hidden;
+  }
+  .faq summary{
+    list-style:none;cursor:pointer;padding:20px 24px;
+    font-family:'Manrope',sans-serif;font-weight:700;font-size:17px;color:var(--ink);
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+  }
+  .faq summary::-webkit-details-marker{display:none}
+  .faq .plus{
+    flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--cream);
+    color:var(--blue);font-size:20px;font-weight:700;line-height:24px;text-align:center;
+    transition:transform .2s ease;
+  }
+  .faq details[open] .plus{transform:rotate(45deg)}
+  .faq .ans{padding:0 24px 22px;font-size:15.5px;color:var(--muted)}
+  .faq .ans .ht{display:block;color:var(--ink);font-weight:600;margin-bottom:6px}
+
+  /* ---- behind ---- */
+  .behind{background:var(--card)}
+  .behind .body-lg{color:#33363f}
+
+  /* ---- host a workshop ---- */
+  .host{background:var(--cream)}
+  .host-card{
+    background:linear-gradient(135deg,#fff 0%,#fbf6ec 100%);
+    border:1px solid #ece8dd;border-radius:22px;
+    padding:clamp(32px,5vw,52px);display:grid;
+    grid-template-columns:1fr auto;gap:36px;align-items:center;
+  }
+  .host-card .red-tab{
+    display:inline-block;background:var(--red);color:#fff;font-size:12px;
+    font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    padding:5px 12px;border-radius:6px;margin-bottom:16px;
+  }
+  .host-card h2{font-size:clamp(26px,3.4vw,36px);font-weight:800;color:var(--blue)}
+  .host-card .en{font-size:14px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+  .host-card p{font-size:16px;color:#33363f;margin-top:14px;max-width:560px}
+
+  /* ---- final cta ---- */
+  .final{
+    background:radial-gradient(900px 500px at 50% -20%,#0b34c9,var(--blue-deep));
+    color:#fff;text-align:center;
+  }
+  .final h2{font-size:clamp(32px,5vw,52px);font-weight:800}
+  .final p{font-size:clamp(17px,2vw,20px);color:#c6cffb;margin:16px auto 32px;max-width:540px}
+  .final .cta-row{justify-content:center}
+
+  /* ---- footer ---- */
+  footer{background:var(--ink);color:#c3c6cf;padding:56px 0 40px}
+  .foot-mark{font-family:'Manrope',sans-serif;font-weight:800;font-size:24px;color:#fff;margin-bottom:8px}
+  .foot-tag{font-size:14px;color:#888c97;margin-bottom:24px}
+  .foot-contact a{color:#fff;text-decoration:none;font-weight:600}
+  .foot-contact{display:flex;flex-direction:column;gap:6px;margin-bottom:26px;font-size:15px}
+  .fineprint{font-size:12.5px;color:#888c97;max-width:720px;line-height:1.7}
+  .copy{margin-top:22px;font-size:13px;color:#6f7079}
+
+  /* ---- reveal animation (progressive enhancement — content stays visible if JS is off) ---- */
+  .reveal{transition:opacity .55s ease,transform .55s ease}
+  .js .reveal{opacity:0;transform:translateY(24px)}
+  .js .reveal.in{opacity:1;transform:none}
+
+  /* ---- sticky mobile CTA ---- */
+  .mobile-bar{display:none}
+
+  /* ---- responsive ---- */
+  @media (max-width:820px){
+    .hero-grid{grid-template-columns:1fr;gap:44px}
+    .hero .sub{max-width:none}
+    .phone{order:-1}
+    .stat-grid{grid-template-columns:repeat(2,1fr);gap:32px 24px}
+    .uc-grid{grid-template-columns:1fr}
+    .cards{grid-template-columns:1fr}
+    .step-grid{grid-template-columns:1fr;gap:34px}
+    .host-card{grid-template-columns:1fr;gap:24px;text-align:left}
+    .nav-link{display:none}
+    body{padding-bottom:78px}
+    .mobile-bar{
+      display:block;position:fixed;bottom:0;left:0;right:0;z-index:60;
+      padding:12px 16px;background:rgba(0,32,159,.98);backdrop-filter:blur(6px);
+      box-shadow:0 -6px 20px rgba(0,0,0,.22);
+    }
+    .mobile-bar a{
+      display:flex;align-items:center;justify-content:center;gap:10px;
+      background:var(--wa);color:#fff;font-family:'Manrope',sans-serif;font-weight:700;
+      font-size:16px;padding:14px;border-radius:999px;text-decoration:none;
+    }
+    .mobile-bar .wa{width:22px;height:22px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="wordmark"><span class="ai">AI</span>Lakay</div>
+    <div class="nav-right">
+      <a class="nav-link" href="#egzanp">Egzanp</a>
+      <a class="nav-link" href="#atelye">Atelye</a>
+      <a class="nav-link" href="#faq">Kesyon</a>
+      <a class="nav-cta js-wa" href="#">Join on WhatsApp</a>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Atelye gratis · South Florida</span>
+        <h1>AI nan lang ou.</h1>
+        <p class="lead">AI in your language. For your life.</p>
+        <p class="sub">Free workshops in South Florida — taught entirely in Haitian Creole. No English required. No tech background required. Just your phone.</p>
+        <div class="cta-row">
+          <a class="btn btn-wa js-wa" href="#">
+            <svg class="wa" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 3C9.4 3 4 8.4 4 15c0 2.3.6 4.4 1.8 6.3L4 29l7.9-1.7c1.8 1 3.9 1.6 6.1 1.6 6.6 0 12-5.4 12-12S22.6 3 16 3z" fill="#fff"/>
+              <path d="M22.6 18.6c-.4-.2-2.1-1-2.4-1.1-.3-.1-.6-.2-.8.2-.2.4-.9 1.1-1.1 1.3-.2.2-.4.2-.8.1-2.2-1.1-3.6-2-5.1-4.5-.4-.7.4-.6 1.1-2 .1-.3 0-.5 0-.7-.1-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.5-.3.4-1.2 1.2-1.2 2.9 0 1.7 1.2 3.4 1.4 3.6.2.2 2.5 3.9 6.1 5.4 2.3 1 3.2 1 4.3.9.7-.1 2.1-.9 2.4-1.7.3-.8.3-1.6.2-1.7-.1-.2-.3-.3-.6-.4z" fill="#25D366"/>
+            </svg>
+            Join on WhatsApp
+          </a>
+          <span class="cta-note">90-min workshop · bring your phone</span>
+        </div>
+      </div>
+      <div>
+        <div class="phone">
+          <div class="screen">
+            <div class="chat-day">Jodi a</div>
+            <div class="bubble me">Kijan pou m ranpli fòm sa a?
+              <span class="tag">How do I fill out this form?</span></div>
+            <div class="bubble them">Mwen ka ede w. Pran yon foto fòm nan ak telefòn ou.
+              <span class="tag">I can help. Take a photo of the form with your phone.</span></div>
+            <div class="bubble me">🎤 (an Kreyòl)
+              <span class="tag">spoken in Creole</span></div>
+            <div class="bubble them">Men sa chak liy vle di…
+              <span class="tag">Here's what each line means…</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STATS ================= -->
+<section class="stats">
+  <div class="wrap" style="padding-top:48px;padding-bottom:48px">
+    <div class="stat-grid">
+      <div class="stat"><div class="num">500K<span class="red">+</span></div><div class="lbl">Creole speakers in Florida</div></div>
+      <div class="stat"><div class="num">100<span class="red">%</span></div><div class="lbl">Gratis — workshops are free</div></div>
+      <div class="stat"><div class="num">90</div><div class="lbl">Minutes to change how you see AI</div></div>
+      <div class="stat"><div class="num">0</div><div class="lbl">English required</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STORY ================= -->
+<section class="story">
+  <div class="wrap reveal">
+    <p class="en-sub">The story</p>
+    <h2 class="kreyol-head"><span class="accent-bar"></span>Sa k pase</h2>
+    <div class="body-lg">
+      <p>A few weeks ago, I installed ChatGPT on my sister's phone and showed her she could speak to it in Creole. Then I showed her she could point her camera at anything — a form, an app, a piece of mail — and it would explain what she was looking at, in Creole.</p>
+      <p class="pull">She signed up for the paid version in five minutes.</p>
+      <p>I'm building AI Lakay so every Haitian Creole speaker who wants to use AI can have that same five minutes. No English required. No tech background required. Just your phone, your language, and someone showing you what's possible.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= USE CASES ================= -->
+<section id="egzanp">
+  <div class="wrap reveal">
+    <p class="en-sub">Real situations</p>
+    <h2 class="kreyol-head"><span class="accent-bar"></span>Sa AI ka fè pou ou</h2>
+    <p class="body-lg">Not theory. Real things, from real Haitian life — the moment AI stops feeling like a tech word and starts feeling useful.</p>
+    <div class="uc-grid">
+      <div class="uc">
+        <span class="ico">📬</span>
+        <h3>Li lèt ak fòm</h3>
+        <p class="en">Read mail &amp; forms</p>
+        <p>Photograph any letter or form and AI explains every line — in Creole.</p>
+      </div>
+      <div class="uc">
+        <span class="ico">📋</span>
+        <h3>Konprann papye imigrasyon</h3>
+        <p class="en">Immigration paperwork</p>
+        <p>Understand what an immigration document is asking before you sign it.</p>
+      </div>
+      <div class="uc">
+        <span class="ico">🎒</span>
+        <h3>Ede timoun yo ak devwa</h3>
+        <p class="en">Help with homework</p>
+        <p>Help your kids with school work even when the subject is new to you.</p>
+      </div>
+      <div class="uc">
+        <span class="ico">💼</span>
+        <h3>Ekri yon CV pou yon djòb</h3>
+        <p class="en">Write a resume</p>
+        <p>Turn your experience into a clean resume and a job application.</p>
+      </div>
+      <div class="uc">
+        <span class="ico">🏥</span>
+        <h3>Prepare pou doktè</h3>
+        <p class="en">Doctor visits</p>
+        <p>Write down your symptoms and questions clearly before an appointment.</p>
+      </div>
+      <div class="uc">
+        <span class="ico">🛒</span>
+        <h3>Grandi ti biznis ou</h3>
+        <p class="en">Grow a small business</p>
+        <p>Write posts, prices, and flyers for your food truck, shop, or service.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LEARN ================= -->
+<section>
+  <div class="wrap reveal">
+    <p class="en-sub">What you'll learn</p>
+    <h2 class="kreyol-head"><span class="accent-bar"></span>Sa w ap aprann</h2>
+    <div class="cards">
+      <div class="card">
+        <span class="ico">📱</span>
+        <h3>Install &amp; speak</h3>
+        <p>How to install ChatGPT on any phone and use it entirely in Creole — by voice.</p>
+      </div>
+      <div class="card">
+        <span class="ico">📷</span>
+        <h3>Point the camera</h3>
+        <p>Use AI to read forms, explain apps, translate documents, and help your kids with homework.</p>
+      </div>
+      <div class="card">
+        <span class="ico">🔒</span>
+        <h3>Stay safe &amp; smart</h3>
+        <p>What's free, what's worth paying for, and how to protect your privacy and personal information.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STEPS ================= -->
+<section class="steps">
+  <div class="wrap reveal">
+    <p class="en-sub">What a workshop is like</p>
+    <h2 class="kreyol-head"><span class="accent-bar"></span>Kijan atelye a ye</h2>
+    <p class="body-lg">No slideshows. No lectures. 90 minutes, your phone in your hand the whole time.</p>
+    <div class="step-grid">
+      <div class="step">
+        <div class="circle">1</div>
+        <h3>Vini ak telefòn ou</h3>
+        <p class="en">Come with your phone</p>
+        <p>Bring your phone, charged. That's the only thing you need. Come as you are.</p>
+      </div>
+      <div class="step">
+        <div class="circle">2</div>
+        <h3>Nou enstale ansanm</h3>
+        <p class="en">We set it up together</p>
+        <p>We install the AI app on your phone and set it up for Creole — step by step, nobody left behind.</p>
+      </div>
+      <div class="step">
+        <div class="circle">3</div>
+        <h3>Ou pratike ak vi reyèl ou</h3>
+        <p class="en">You practice with real life</p>
+        <p>Bring a real form or a real question. You leave already knowing how to use it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHO FOR ================= -->
+<section class="whofor">
+  <div class="wrap reveal">
+    <p class="en-sub">Who this is for</p>
+    <h2 class="kreyol-head"><span class="accent-bar"></span>Pou kiyès sa a ye</h2>
+    <p class="body-lg">If you speak Creole and have a smartphone, you're ready. No technical background. No English required. Whether you're a parent, a contractor, a food vendor, a church leader, a student, or someone helping their grandmother figure out a new app — this is for you.</p>
+    <div class="tags">
+      <span class="tag-pill">Paran</span>
+      <span class="tag-pill">Kontraktè</span>
+      <span class="tag-pill">Machann manje</span>
+      <span class="tag-pill">Lidè legliz</span>
+      <span class="tag-pill">Etidyan</span>
+      <span class="tag-pill">Granmoun</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WORKSHOP ================= -->
+<section class="workshop" id="atelye">
+  <div class="wrap reveal inner">
+    <p class="en-sub" style="color:#9fb4ff">The first workshop</p>
+    <h2 class="kreyol-head"><span class="accent-bar"></span>Premye atelye a</h2>
+    <div class="body-lg">
+      <p>First free workshop coming soon to South Florida. 90 minutes. Bring your phone.</p>
+      <p>Date and location announced first to the WhatsApp community. Join below to be notified.</p>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-primary js-wa-list" href="#">
+        <svg class="wa" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 3C9.4 3 4 8.4 4 15c0 2.3.6 4.4 1.8 6.3L4 29l7.9-1.7c1.8 1 3.9 1.6 6.1 1.6 6.6 0 12-5.4 12-12S22.6 3 16 3z" fill="#25D366"/>
+          <path d="M22.6 18.6c-.4-.2-2.1-1-2.4-1.1-.3-.1-.6-.2-.8.2-.2.4-.9 1.1-1.1 1.3-.2.2-.4.2-.8.1-2.2-1.1-3.6-2-5.1-4.5-.4-.7.4-.6 1.1-2 .1-.3 0-.5 0-.7-.1-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.5-.3.4-1.2 1.2-1.2 2.9 0 1.7 1.2 3.4 1.4 3.6.2.2 2.5 3.9 6.1 5.4 2.3 1 3.2 1 4.3.9.7-.1 2.1-.9 2.4-1.7.3-.8.3-1.6.2-1.7-.1-.2-.3-.3-.6-.4z" fill="#fff"/>
+        </svg>
+        Get the date
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="faq" id="faq">
+  <div class="wrap reveal">
+    <p class="en-sub">Questions</p>
+    <h2 class="kreyol-head"><span class="accent-bar"></span>Kesyon yo poze souvan</h2>
+    <div style="margin-top:36px">
+      <details open>
+        <summary>Èske li vrèman gratis? <span class="plus">+</span></summary>
+        <div class="ans"><span class="ht">Wi. Atelye yo gratis nèt — ou pa peye anyen pou vini aprann.</span>Yes. The workshops are completely free. You pay nothing to come and learn.</div>
+      </details>
+      <details>
+        <summary>Èske m bezwen konnen anglè? <span class="plus">+</span></summary>
+        <div class="ans"><span class="ht">Non. Tout bagay fèt an Kreyòl, depi nan kòmansman rive nan fen.</span>No. Everything is taught in Creole, start to finish.</div>
+      </details>
+      <details>
+        <summary>Èske m bezwen konnen teknoloji? <span class="plus">+</span></summary>
+        <div class="ans"><span class="ht">Non. Si w ka voye yon mesaj sou telefòn ou, ou pare.</span>No. If you can send a text message on your phone, you are ready.</div>
+      </details>
+      <details>
+        <summary>Konbyen sa koute pou itilize AI? <span class="plus">+</span></summary>
+        <div class="ans"><span class="ht">Genyen yon vèsyon gratis ki bon anpil. Vèsyon konplè a se $20 pa mwa — nou ap montre w sa ki vo lajan an pou ou.</span>There's a free version that works well. The full version is $20/month — we show you what's actually worth paying for.</div>
+      </details>
+      <details>
+        <summary>Èske enfòmasyon m yo an sekirite? <span class="plus">+</span></summary>
+        <div class="ans"><span class="ht">Nou ap montre w kijan pou pwoteje vi prive w ak sa ou pa dwe pataje.</span>We show you how to protect your privacy and what information you should never share.</div>
+      </details>
+      <details>
+        <summary>Èske m ka mennen fanmi m oswa zanmi m? <span class="plus">+</span></summary>
+        <div class="ans"><span class="ht">Wi, tanpri! Mennen yon zanmi, yon vwazen, oswa yon granmoun ki ta renmen aprann.</span>Yes, please! Bring a friend, a neighbor, or an elder who'd like to learn.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BEHIND ================= -->
+<section class="behind">
+  <div class="wrap reveal">
+    <p class="en-sub">Who's behind this</p>
+    <h2 class="kreyol-head"><span class="accent-bar"></span>Ki moun ki dèyè sa a</h2>
+    <div class="body-lg">
+      <p>AI Lakay is built by Weber Gouin, a Haitian-American technologist. Weber has spent 15+ years building software and BIM systems for architecture and construction. Now he's bringing what he knows about AI to the community he comes from.</p>
+      <p>AI Lakay is community-first. Workshops are free. The paid services that will eventually fund this come later — after trust.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOST A WORKSHOP ================= -->
+<section class="host" id="host">
+  <div class="wrap reveal">
+    <div class="host-card">
+      <div>
+        <span class="red-tab">Pou lidè kominote yo</span>
+        <p class="en">For church &amp; community leaders</p>
+        <h2>Vle nou vin lakay ou?</h2>
+        <p>Do you lead a church, a community center, or a group of Haitian families? We'll bring the entire workshop to your space — free. You provide the room and the people; we bring everything else.</p>
+      </div>
+      <div>
+        <a class="btn btn-wa js-wa-host" href="#">
+          <svg class="wa" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 3C9.4 3 4 8.4 4 15c0 2.3.6 4.4 1.8 6.3L4 29l7.9-1.7c1.8 1 3.9 1.6 6.1 1.6 6.6 0 12-5.4 12-12S22.6 3 16 3z" fill="#fff"/>
+            <path d="M22.6 18.6c-.4-.2-2.1-1-2.4-1.1-.3-.1-.6-.2-.8.2-.2.4-.9 1.1-1.1 1.3-.2.2-.4.2-.8.1-2.2-1.1-3.6-2-5.1-4.5-.4-.7.4-.6 1.1-2 .1-.3 0-.5 0-.7-.1-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.5-.3.4-1.2 1.2-1.2 2.9 0 1.7 1.2 3.4 1.4 3.6.2.2 2.5 3.9 6.1 5.4 2.3 1 3.2 1 4.3.9.7-.1 2.1-.9 2.4-1.7.3-.8.3-1.6.2-1.7-.1-.2-.3-.3-.6-.4z" fill="#25D366"/>
+          </svg>
+          Host a workshop
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<section class="final">
+  <div class="wrap reveal">
+    <h2>Senk minit ou ap tann ou.</h2>
+    <p>Your five minutes is waiting. Join the WhatsApp community and we'll tell you the moment the first workshop lands.</p>
+    <div class="cta-row">
+      <a class="btn btn-wa js-wa" href="#">
+        <svg class="wa" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 3C9.4 3 4 8.4 4 15c0 2.3.6 4.4 1.8 6.3L4 29l7.9-1.7c1.8 1 3.9 1.6 6.1 1.6 6.6 0 12-5.4 12-12S22.6 3 16 3z" fill="#fff"/>
+          <path d="M22.6 18.6c-.4-.2-2.1-1-2.4-1.1-.3-.1-.6-.2-.8.2-.2.4-.9 1.1-1.1 1.3-.2.2-.4.2-.8.1-2.2-1.1-3.6-2-5.1-4.5-.4-.7.4-.6 1.1-2 .1-.3 0-.5 0-.7-.1-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.5-.3.4-1.2 1.2-1.2 2.9 0 1.7 1.2 3.4 1.4 3.6.2.2 2.5 3.9 6.1 5.4 2.3 1 3.2 1 4.3.9.7-.1 2.1-.9 2.4-1.7.3-.8.3-1.6.2-1.7-.1-.2-.3-.3-.6-.4z" fill="#25D366"/>
+        </svg>
+        Join on WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-mark">AI Lakay</div>
+    <div class="foot-tag">AI nan lang ou. Pou lavi w.</div>
+    <div class="foot-contact">
+      <span>📧 <a href="mailto:weber@bimopsstudio.com">weber@bimopsstudio.com</a></span>
+      <span>📱 <a class="js-wa" href="#">WhatsApp community</a></span>
+    </div>
+    <p class="fineprint">
+      AI Lakay is an educational initiative. We are not affiliated with OpenAI, Anthropic, Google, or any AI company. Information shared in workshops and content is for educational purposes only and is not legal, medical, or financial advice. For complex situations involving immigration, health, or money, always consult a licensed professional.
+    </p>
+    <p class="copy">© 2026 AI Lakay · ailakay.com</p>
+  </div>
+</footer>
+
+<!-- ================= STICKY MOBILE CTA ================= -->
+<div class="mobile-bar">
+  <a class="js-wa" href="#">
+    <svg class="wa" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 3C9.4 3 4 8.4 4 15c0 2.3.6 4.4 1.8 6.3L4 29l7.9-1.7c1.8 1 3.9 1.6 6.1 1.6 6.6 0 12-5.4 12-12S22.6 3 16 3z" fill="#fff"/>
+      <path d="M22.6 18.6c-.4-.2-2.1-1-2.4-1.1-.3-.1-.6-.2-.8.2-.2.4-.9 1.1-1.1 1.3-.2.2-.4.2-.8.1-2.2-1.1-3.6-2-5.1-4.5-.4-.7.4-.6 1.1-2 .1-.3 0-.5 0-.7-.1-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.5-.3.4-1.2 1.2-1.2 2.9 0 1.7 1.2 3.4 1.4 3.6.2.2 2.5 3.9 6.1 5.4 2.3 1 3.2 1 4.3.9.7-.1 2.1-.9 2.4-1.7.3-.8.3-1.6.2-1.7-.1-.2-.3-.3-.6-.4z" fill="#25D366"/>
+    </svg>
+    Join on WhatsApp
+  </a>
+</div>
+
+<script>
+  /* =====================================================
+     ONLY EDIT THIS LINE — your WhatsApp number.
+     Format: country code + number, no +, no spaces, no dashes.
+     Example for a US number: "13055551234"
+     ===================================================== */
+  const WHATSAPP_NUMBER = "1XXXXXXXXXX";
+
+  (function(){
+    var base    = "https://wa.me/" + WHATSAPP_NUMBER;
+    var join    = encodeURIComponent("Bonjou, m enterese nan AI Lakay");
+    var list    = encodeURIComponent("Mete m sou lis la pou premye atelye a");
+    var host    = encodeURIComponent("Bonjou, mwen se yon lidè kominote — m ta renmen yon atelye");
+
+    document.querySelectorAll(".js-wa").forEach(function(a){ a.href = base + "?text=" + join; });
+    document.querySelectorAll(".js-wa-list").forEach(function(a){ a.href = base + "?text=" + list; });
+    document.querySelectorAll(".js-wa-host").forEach(function(a){ a.href = base + "?text=" + host; });
+
+    /* scroll reveal */
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target);} });
+    },{threshold:.12});
+    document.querySelectorAll(".reveal").forEach(function(el){ io.observe(el); });
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!-- Source for the social share card. Rendered to og-image.png at 1200x630. -->
+<html lang="ht">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1200px;height:630px;overflow:hidden}
+  body{
+    font-family:'Inter',sans-serif;
+    background:radial-gradient(900px 520px at 80% -8%,#0b34c9 0%,#00209F 44%,#001563 100%);
+    color:#fff;position:relative;
+  }
+  .glow{
+    position:absolute;width:380px;height:380px;border-radius:50%;
+    background:radial-gradient(circle,rgba(210,16,52,.6),transparent 70%);
+    bottom:-170px;left:-120px;
+  }
+  .bubble-deco{
+    position:absolute;right:64px;top:50%;transform:translateY(-50%);
+    width:300px;height:300px;opacity:.16;
+  }
+  .content{position:relative;z-index:2;padding:74px 80px;height:100%;display:flex;flex-direction:column}
+  .wordmark{font-family:'Manrope',sans-serif;font-weight:800;font-size:38px;display:flex;align-items:center;gap:13px}
+  .wordmark .ai{background:#FAF8F2;color:#00209F;padding:2px 16px;border-radius:11px}
+  .eyebrow{
+    font-weight:600;font-size:21px;letter-spacing:.14em;text-transform:uppercase;
+    color:#9fb4ff;margin-top:auto;margin-bottom:22px;
+  }
+  h1{font-family:'Manrope',sans-serif;font-weight:800;font-size:118px;line-height:1.02;letter-spacing:-.03em}
+  .lead{font-size:34px;font-weight:500;color:#e7ebff;margin-top:24px}
+  .accent{display:block;width:96px;height:9px;background:#D21034;border-radius:5px;margin-top:34px}
+</style>
+</head>
+<body>
+  <div class="glow"></div>
+  <svg class="bubble-deco" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <path d="M14 16h36a6 6 0 0 1 6 6v20a6 6 0 0 1-6 6H30l-12 10V54h-4a6 6 0 0 1-6-6V22a6 6 0 0 1 6-6z" fill="#FAF8F2"/>
+  </svg>
+  <div class="content">
+    <div class="wordmark"><span class="ai">AI</span>Lakay</div>
+    <div class="eyebrow">Atelye gratis an Kreyòl · South Florida</div>
+    <h1>AI nan<br>lang ou.</h1>
+    <div class="lead">AI in your language. For your life.</div>
+    <span class="accent"></span>
+  </div>
+</body>
+</html>
