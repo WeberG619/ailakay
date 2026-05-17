@@ -619,8 +619,8 @@
       <button type="submit" class="btn btn-wa">Enskri →</button>
     </form>
     <div class="form-thanks" id="formThanks">
-      Mèsi! Nou resevwa enskripsyon ou. 🙌
-      <span>Thank you — we've got your signup and we'll be in touch soon.</span>
+      Yon dènye etap — voye imèl la ki fèk louvri a. 🙌
+      <span>One last step: send the email that just opened, and you're on the list.</span>
     </div>
     <div class="form-err" id="formErr">
       Yon erè rive — tanpri ekri nou dirèkteman: weber@bimopsstudio.com
@@ -679,7 +679,7 @@
       document.querySelectorAll(".js-wa,.js-wa-list,.js-wa-host").forEach(function(a){ a.href = "#enskri"; });
     }
 
-    /* signup form -> emails submissions to weber@bimopsstudio.com via FormSubmit */
+    /* signup form -> opens a pre-filled email to weber@bimopsstudio.com */
     var form = document.getElementById("signupForm");
     if (form) {
       form.addEventListener("submit", function(e){
@@ -690,30 +690,16 @@
           err.style.display = "block";
           return;
         }
-        var btn = form.querySelector("button");
-        btn.disabled = true; btn.textContent = "Y ap voye…";
-        fetch("https://formsubmit.co/ajax/weber@bimopsstudio.com", {
-          method:"POST",
-          headers:{"Content-Type":"application/json","Accept":"application/json"},
-          body: JSON.stringify({
-            Non: form.non.value,
-            WhatsApp: form.whatsapp.value,
-            Vil: form.vil.value || "—",
-            _subject: "AI Lakay — Nouvo enskripsyon",
-            _template: "table"
-          })
-        })
-        .then(function(r){ return r.json(); })
-        .then(function(){
-          form.style.display = "none";
-          err.style.display = "none";
-          document.getElementById("formThanks").style.display = "block";
-        })
-        .catch(function(){
-          btn.disabled = false; btn.textContent = "Enskri →";
-          err.textContent = "Yon erè rive — tanpri ekri nou dirèkteman: weber@bimopsstudio.com";
-          err.style.display = "block";
-        });
+        var body = "Non: " + form.non.value
+                 + "\nNimewo WhatsApp: " + form.whatsapp.value
+                 + "\nVil: " + (form.vil.value || "—")
+                 + "\n\n— Enskripsyon soti nan ailakay.com";
+        window.location.href = "mailto:weber@bimopsstudio.com"
+          + "?subject=" + encodeURIComponent("AI Lakay — Nouvo enskripsyon")
+          + "&body=" + encodeURIComponent(body);
+        err.style.display = "none";
+        form.style.display = "none";
+        document.getElementById("formThanks").style.display = "block";
       });
     }
 
