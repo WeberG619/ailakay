@@ -132,6 +132,30 @@
   }
   .bubble .tag{display:block;font-size:10px;opacity:.6;margin-top:4px}
 
+  /* ---- voice play button (shown by JS only once the Creole clip is available) ---- */
+  .voice-play{
+    display:none;align-items:center;gap:13px;margin:20px auto 0;
+    background:var(--cream);color:var(--blue);border:none;cursor:pointer;
+    padding:11px 24px 11px 12px;border-radius:999px;
+    box-shadow:0 12px 30px rgba(0,0,0,.28);transition:transform .15s ease;
+  }
+  .voice-play:hover{transform:translateY(-2px)}
+  .voice-play .vp-ico{
+    width:42px;height:42px;border-radius:50%;background:var(--blue);color:#fff;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .voice-play .vp-ico svg{width:19px;height:19px;margin-left:2px}
+  .voice-play.playing .vp-ico{background:var(--wa);animation:vpglow 1.1s ease-in-out infinite}
+  @keyframes vpglow{0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,.55)}50%{box-shadow:0 0 0 10px rgba(37,211,102,0)}}
+  .voice-play .vp-txt{
+    font-family:'Manrope',sans-serif;font-weight:800;font-size:15px;
+    text-align:left;line-height:1.25;color:var(--ink);
+  }
+  .voice-play .vp-txt small{
+    display:block;font-family:'Inter',sans-serif;font-weight:400;
+    font-size:12px;color:var(--muted);margin-top:1px;
+  }
+
   /* ---- stats strip ---- */
   .stats{background:var(--ink);color:#fff}
   .stats .wrap{padding-top:0;padding-bottom:0}
@@ -369,6 +393,11 @@
               <span class="tag">Here's what each line means…</span></div>
           </div>
         </div>
+        <button class="voice-play" id="voicePlay" type="button" aria-label="Tande AI a pale Kreyòl">
+          <span class="vp-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="vp-txt">Tande AI a pale Kreyòl<small>Hear the AI speak — tap to listen</small></span>
+        </button>
+        <audio id="voiceClip" preload="auto"></audio>
       </div>
     </div>
   </div>
@@ -700,6 +729,20 @@
         err.style.display = "none";
         form.style.display = "none";
         document.getElementById("formThanks").style.display = "block";
+      });
+    }
+
+    /* voice demo — plays a Creole AI clip; button stays hidden until the clip exists */
+    var vp = document.getElementById("voicePlay");
+    var clip = document.getElementById("voiceClip");
+    if (vp && clip) {
+      clip.src = "audio/demo-creole.wav";
+      clip.addEventListener("canplaythrough", function(){ vp.style.display = "flex"; });
+      clip.addEventListener("error", function(){ vp.style.display = "none"; });
+      clip.addEventListener("ended", function(){ vp.classList.remove("playing"); });
+      vp.addEventListener("click", function(){
+        if (clip.paused) { clip.currentTime = 0; clip.play(); vp.classList.add("playing"); }
+        else { clip.pause(); vp.classList.remove("playing"); }
       });
     }
 
